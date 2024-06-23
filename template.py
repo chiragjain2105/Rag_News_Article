@@ -10,6 +10,7 @@ list_of_files = [
     "src/components/data_ingestion.py",
     "src/components/data_preparation.py",
     "src/components/rag_system/split_document.py",
+    "src/components/rag_system/retriever_embedding.py",
     "src/pipeline/__init__.py",
     "src/utils/__init__.py",
     "src/utils/utils.py",
