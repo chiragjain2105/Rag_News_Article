@@ -7,3 +7,6 @@ pandas
 numpy
 tqdm
 faiss-cpu
+python-dotenv
+
+-e .
