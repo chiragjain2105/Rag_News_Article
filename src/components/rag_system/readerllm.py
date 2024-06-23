@@ -1,15 +1,9 @@
-from langchain_huggingface import HuggingFaceEndpoint
 from prompts.readerllm import RAG_PROMPT_TEMPLATE
 from typing import List,Optional,Tuple
 from langchain.docstore.document import Document as LangchainDocument
 from langchain.vectorstores import FAISS
 
-READER_LLM=HuggingFaceEndpoint(
-    repo_id="",
-    task="text-generation",
-    max_new_tokens=1000,
-    do_sample=False
-)
+
 
 
 def answer_with_rag(

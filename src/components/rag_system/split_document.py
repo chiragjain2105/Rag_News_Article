@@ -5,11 +5,6 @@ from src.components.data_preparation import random_articles
 
 
 
-
-RAW_KNOWLEDGE_BASE = [
-    LangchainDocument(page_content=doc['articleBody'],metdata={"source":doc['source'],"title":doc['title']}) for doc in random_articles
-]
-
 def split_documents(
         chunk_size:int,
         knowledge_base: List[LangchainDocument]
