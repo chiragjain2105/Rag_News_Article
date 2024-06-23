@@ -38,6 +38,10 @@ for item in news_article:
 
 
 # random_articles = random.sample(filtered_articles,2500)
+# ----------------------------------------------------------------------------------
+random_articles=random_articles
+# ----------------------------------------------------------------------------------
+
 langchain_docs = [
     LangchainDocument(page_content=doc['articleBosy'],metadata={"source":doc['source'],"title":doc['title']}) for doc in random_articles
     ]
