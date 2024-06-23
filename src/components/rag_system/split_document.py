@@ -12,8 +12,7 @@ RAW_KNOWLEDGE_BASE = [
 
 def split_documents(
         chunk_size:int,
-        knowledge_base: List[LangchainDocument],
-        tokenizer_name:str
+        knowledge_base: List[LangchainDocument]
 ):
     text_splitter=RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,chunk_overlap=int(chunk_size/10),add_start_index=True,separators=["\n","\n\n",".",""," "]
