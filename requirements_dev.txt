@@ -1,0 +1,9 @@
+langchain_community
+langchain-huggingface
+datasets
+langchain_cohere
+langchain_groq
+pandas
+numpy
+tqdm
+faiss-cpu
