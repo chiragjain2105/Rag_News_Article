@@ -12,13 +12,16 @@ from src.components.rag_system.retriever_embedding import load_embeddings
 from langchain.docstore.document import Document as LangchainDocument
 from src.components.benchmark_rag.run_rag_test import run_rag_tests
 from src.components.benchmark_rag.evaluate_answer import evaluate_answers
-from src.components.data_preparation import eval_dataset
+# from src.components.data_preparation import eval_dataset
 import glob
 import pandas as pd
+from src.components.data_preparation import data_preparation
 
 
 load_dotenv()
 
+logging.info("evaluation started.....")
+qa_data,random_articles,eval_dataset=data_preparation()
 READER_LLM=HuggingFaceEndpoint(
     repo_id="mistralai/Mistral-7B-Instruct-v0.3",
     task="text-generation",
@@ -45,24 +48,35 @@ eval_chat_model=ChatGroq(
 
 evaluator_name="Groq_llama"
 
+
+logging.info("Loading knowledge base embedding..........")
+knowledge_index=load_embeddings(
+    RAW_KNOWLEDGE_BASE,
+    chunk_size=2500,
+    embeddings_model="embed-english-light-v3.0"
+)
+
+
+
+
 if not os.path.isdir("./output"):
     os.mkdir("./output")
 
 for chunk_size in [2500]:
     for embeddings in ["embed-english-light-v3.0"]:
         for rerank in [False]:
-            settings_name=f"chunk_size:{chunk_size}_embedding:{embeddings.replace('/','~')}_rerank:{rerank}_readerLLM:{READER_LLM}"
-            output_file_name=f"./output/rag_{settings_name}"
+            settings_name=f"chunk_size_{chunk_size}_embedding_{embeddings.replace('/','_')}_rerank_{rerank}_mistral"
+            output_file_name=f"./output/rag_{settings_name}.json"
 
             logging.info(f"Running RAG with setting: {settings_name}")
 
-            logging.info("Loading knowledge base embedding..........")
+            # logging.info("Loading knowledge base embedding..........")
 
-            knowledge_index=load_embeddings(
-                RAW_KNOWLEDGE_BASE,
-                chunk_size=chunk_size,
-                embeddings_model=embeddings
-            )
+            # knowledge_index=load_embeddings(
+            #     RAW_KNOWLEDGE_BASE,
+            #     chunk_size=chunk_size,
+            #     embeddings_model=embeddings
+            # )
 
             logging.info("Running RAG...........")
             reranker=None

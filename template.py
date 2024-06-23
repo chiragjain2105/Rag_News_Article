@@ -4,6 +4,7 @@ from pathlib import Path
 list_of_files = [
     ".github/workflows/.gitkeep",
     ".env",
+    "prompts/__init__.py",
     "prompts/data_prep_prompts.py",
     "prompts/readerllm.py",
     "prompts/evaluation_prompt.py",

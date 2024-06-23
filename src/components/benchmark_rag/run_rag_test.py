@@ -1,7 +1,7 @@
 import datasets
 from typing import Optional,List,Tuple
 from tqdm.auto import tqdm
-import json
+import json 
 from src.components.rag_system.readerllm import answer_with_rag
 
 def run_rag_tests(
@@ -35,7 +35,7 @@ def run_rag_tests(
             print("-------------------------------------------------------------------------------")
             print(f"Question: {question}")
             print(f"Answer: {answer}")
-            print(f"True Answer: {example["answer"]}")
+            print(f"True Answer: {example['answer']}")
         
 
         result = {

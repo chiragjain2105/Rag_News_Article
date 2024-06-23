@@ -32,7 +32,7 @@ def evaluate_answers(
         for experiment in tqdm(answers):
             if f"eval_score_{evaluator_name}" in experiment:
                 continue
-            eval_prompt=evaluate_prompt_template.format_messages(
+            eval_prompt=evaluation_prompt_template.format_messages(
                 instruction=experiment["question"],
                 response=experiment["generated_answer"],
                 reference_answer=experiment["true_answer"]

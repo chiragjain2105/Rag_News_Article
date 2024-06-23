@@ -7,6 +7,8 @@ import os
 from dotenv import load_dotenv
 from typing import List,Optional,Tuple
 from src.components.rag_system.split_document import split_documents
+from src.logger.logging import logging
+
 
 load_dotenv()
 
@@ -15,17 +17,23 @@ def load_embeddings(
         chunk_size:int,
         embeddings_model
 )->FAISS:
+    
+    logging.info("Accessing embedding")
     embedding_model=CohereEmbeddings(model=embeddings_model)
-    index_name=f"index_chunk:{chunk_size}_embeddings:{embeddings_model.replace('/','~')}"
-    index_folder_path=f"./data/indexes/{index_name}"
 
+    logging.info("saving or importing vector index")
+    index_name=f"index_chunk_{chunk_size}_embeddings_{embeddings_model.replace('/', '_')}"
+    index_folder_path=f"./data/indexes/{index_name}"
+    
     if os.path.isdir(index_folder_path):
+        logging.info("imported index")
         return FAISS.load_local(
             index_folder_path,
             embedding_model,
             distance_strategy=DistanceStrategy.COSINE
         )
     else:
+        logging.info("saving index")
         docs_processed=split_documents(
             chunk_size,
             langchain_docs

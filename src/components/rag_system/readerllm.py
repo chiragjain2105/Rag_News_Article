@@ -16,7 +16,7 @@ def answer_with_rag(
 )->Tuple[str,LangchainDocument]:
     
     relevant_docs=knowledge_index.similarity_search(question,k=num_retrieved_docs)
-    relevant_docs=[doc.page_contet for doc in relevant_docs]
+    relevant_docs=[doc.page_content for doc in relevant_docs]
 
     if reranker:
         pass
